@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic";
+
 import { redirect } from "next/navigation";
 import { EntrarForm } from "@/app/entrar/EntrarForm";
 import { criarClienteServidor } from "@/lib/supabase/server";

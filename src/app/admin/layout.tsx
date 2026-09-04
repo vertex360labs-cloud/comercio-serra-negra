@@ -1,5 +1,7 @@
 import Link from "next/link";
 import { redirect } from "next/navigation";
+export const dynamic = "force-dynamic";
+
 import { usuarioAdmin } from "@/lib/admin";
 import { criarClienteServidor } from "@/lib/supabase/server";
 import { supabaseConfigurado } from "@/lib/supabase/env";

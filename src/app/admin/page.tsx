@@ -12,6 +12,14 @@ export const metadata = metadataPagina({
 });
 
 export default async function AdminPage() {
+  if (!process.env.SUPABASE_SERVICE_ROLE_KEY) {
+    return (
+      <p className="rounded-2xl bg-card p-6 text-sm shadow-sm">
+        Configure <code>SUPABASE_SERVICE_ROLE_KEY</code> na Vercel para listar
+        as fichas.
+      </p>
+    );
+  }
   const admin = criarClienteAdmin();
   const { data } = await admin
     .from("negocios")
