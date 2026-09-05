@@ -29,6 +29,16 @@ npm run dev
 
 Sem Supabase na nuvem, a home e a listagem caem no seed local. Painel, reivindicar e admin precisam do projeto remoto.
 
+## Seed remoto (Supabase cloud)
+
+Com `NEXT_PUBLIC_SUPABASE_URL` e `SUPABASE_SERVICE_ROLE_KEY` no ambiente (ou `.env.local`):
+
+```bash
+npm run seed:remoto
+```
+
+Faz upsert de categorias e negócios mock no projeto cloud. Não rode isso em produção sem revisar os dados.
+
 ## Deploy
 
 Push na `main` → Vercel. Rode a migration `supabase/migrations` no projeto cloud antes do painel.

@@ -1,0 +1,12 @@
+# Só MCP, plugins e permissão valem neste arquivo.
+# Compactação, modelo e gitignore: ~/.grok/config.toml
+
+[permission]
+deny = [
+  "Read(node_modules/**)",
+  "Read(.next/**)",
+  "Read(.env)",
+  "Read(.env.local)",
+  "Read(**/.env)",
+  "Read(**/.env.local)",
+]
