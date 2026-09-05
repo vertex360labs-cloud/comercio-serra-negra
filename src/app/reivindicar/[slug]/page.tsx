@@ -34,12 +34,16 @@ export default async function ReivindicarPage({ params }: Props) {
         Sou o dono de {negocio.nome}
       </h1>
       <p className="mt-3 text-sm text-muted-foreground">
-        Confirme e-mail e WhatsApp. Em dois minutos a ficha cai no painel para
-        você completar horário e foto.
+        Informe CNPJ, WhatsApp do dono e confirme o endereço. Depois do e-mail,
+        a gente analisa e libera a ficha — para ninguém se passar por você.
       </p>
       <div className="mt-8">
         {supabaseConfigurado() ? (
-          <ReivindicarForm negocioId={negocio.id} negocioNome={negocio.nome} />
+          <ReivindicarForm
+            negocioId={negocio.id}
+            negocioNome={negocio.nome}
+            enderecoResumo={`${negocio.logradouro}, ${negocio.numero ?? "s/n"} — ${negocio.bairro}, Serra Negra/SP`}
+          />
         ) : (
           <p className="rounded-xl bg-card p-4 text-sm shadow-sm">
             O painel entra quando o Supabase estiver no ar. Enquanto isso, a

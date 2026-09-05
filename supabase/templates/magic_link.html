@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<body style="margin:0;padding:0;background:#f6f1ea;font-family:Georgia,serif;color:#1c1917">
+  <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="background:#f6f1ea;padding:24px 12px">
+    <tr><td align="center">
+      <table role="presentation" width="100%" style="max-width:560px;background:#fff;border-radius:16px;padding:28px 24px">
+        <tr><td>
+          <p style="margin:0 0 8px;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:#a16207">Comércio Serra Negra</p>
+          <h1 style="margin:0 0 16px;font-size:22px;line-height:1.3">Seu link de acesso ao painel</h1>
+          <p style="margin:0 0 16px;font-size:16px;line-height:1.5;color:#44403c">
+            Clique no botão abaixo para entrar. O link é pessoal e expira em breve —
+            se você não pediu, pode ignorar este e-mail.
+          </p>
+          <p style="margin:0 0 20px">
+            <a href="{{ .ConfirmationURL }}" style="display:inline-block;background:#ca8a04;color:#1c1917;text-decoration:none;font-weight:700;padding:12px 18px;border-radius:999px">
+              Entrar no painel
+            </a>
+          </p>
+          <p style="margin:0;font-size:12px;line-height:1.5;color:#a8a29e;word-break:break-all">
+            Se o botão não funcionar, copie e cole este link no navegador:<br/>
+            {{ .ConfirmationURL }}
+          </p>
+        </td></tr>
+      </table>
+    </td></tr>
+  </table>
+</body>
+</html>

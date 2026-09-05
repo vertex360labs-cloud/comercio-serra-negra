@@ -39,6 +39,17 @@ npm run seed:remoto
 
 Faz upsert de categorias e negócios mock no projeto cloud. Não rode isso em produção sem revisar os dados.
 
+## E-mail (aprovação + magic link)
+
+| Variável | Uso |
+|---|---|
+| `RESEND_API_KEY` | Envia o e-mail "ficha aprovada" (+ serviços) |
+| `EMAIL_FROM` | Remetente Resend |
+
+Sem `RESEND_API_KEY`, a aprovação no admin ainda funciona; só o e-mail é pulado.
+
+Template magic link pt-BR: `supabase/templates/magic_link.html`. No free tier do Supabase, cole o HTML em Authentication → Email Templates → Magic Link (assunto único reduz o agrupamento no Gmail).
+
 ## Deploy
 
 Push na `main` → Vercel. Rode a migration `supabase/migrations` no projeto cloud antes do painel.

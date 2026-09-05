@@ -26,7 +26,7 @@ export async function GET(request: Request) {
   if (user) await promoverAdminSePreciso(user);
 
   if (reivindicar) {
-    const { error: rpcErro } = await supabase.rpc("aprovar_reivindicacao", {
+    const { error: rpcErro } = await supabase.rpc("vincular_reivindicacao", {
       p_id: reivindicar,
     });
     if (rpcErro) {
@@ -34,6 +34,11 @@ export async function GET(request: Request) {
         `${origem}/painel?aviso=${encodeURIComponent(rpcErro.message)}`,
       );
     }
+    return NextResponse.redirect(
+      `${origem}/painel?aviso=${encodeURIComponent(
+        "E-mail confirmado. Sua reivindicação está em análise — avisamos por e-mail quando aprovar.",
+      )}`,
+    );
   }
 
   return NextResponse.redirect(`${origem}${next.startsWith("/") ? next : "/painel"}`);
