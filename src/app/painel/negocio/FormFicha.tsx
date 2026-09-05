@@ -48,7 +48,6 @@ export function FormFicha({ negocio }: { negocio: Negocio }) {
     else {
       setCapa(url);
       setOk(true);
-      router.refresh();
     }
   }
 
@@ -85,7 +84,7 @@ export function FormFicha({ negocio }: { negocio: Negocio }) {
           if (error) setErro(error.message);
           else {
             setOk(true);
-            router.refresh();
+            router.push("/painel");
           }
         } catch (e) {
           setErro(e instanceof Error ? e.message : "Não salvou.");

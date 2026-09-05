@@ -49,7 +49,12 @@ export async function atualizarSessao(request: NextRequest) {
     const url = request.nextUrl.clone();
     url.pathname = "/entrar";
     url.searchParams.set("next", request.nextUrl.pathname);
-    return NextResponse.redirect(url);
+    const redirect = NextResponse.redirect(url);
+    // Preserva cookies que o refresh da sessão possa ter setado.
+    response.cookies.getAll().forEach((cookie) => {
+      redirect.cookies.set(cookie.name, cookie.value);
+    });
+    return redirect;
   }
 
   return response;
