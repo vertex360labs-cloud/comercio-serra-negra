@@ -219,18 +219,14 @@ otp_length = 6
 # Number of seconds before the email OTP expires (defaults to 1 hour).
 otp_expiry = 3600
 
+# Desligado de propósito: volta e-mail padrão do Supabase para magic link.
+# Reative SMTP Resend só com domínio verificado.
 [auth.email.smtp]
-enabled = true
-host = "smtp.resend.com"
-port = 465
-user = "resend"
-pass = "env(RESEND_API_KEY)"
-admin_email = "vertex360.labs@gmail.com"
-sender_name = "Comércio Serra Negra"
+enabled = false
 
-[auth.email.template.magic_link]
-subject = "Link Comércio Serra Negra — entre no painel"
-content_path = "./supabase/templates/magic_link.html"
+# [auth.email.template.magic_link]
+# subject = "Link Comércio Serra Negra — entre no painel"
+# content_path = "./supabase/templates/magic_link.html"
 
 # [auth.email.template.invite]
 # subject = "You have been invited"
