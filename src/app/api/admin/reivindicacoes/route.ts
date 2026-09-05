@@ -64,6 +64,18 @@ export async function PATCH(request: Request) {
     return NextResponse.json({ erro: "WhatsApp do proprietário ausente." }, { status: 400 });
   }
 
+  const { data: negocioAtual } = await admin
+    .from("negocios")
+    .select("dono_id")
+    .eq("id", rec.negocio_id)
+    .maybeSingle();
+  if (negocioAtual?.dono_id && negocioAtual.dono_id !== rec.user_id) {
+    return NextResponse.json(
+      { erro: "Esta ficha já tem outro dono. Recuse ou resolva manualmente." },
+      { status: 400 },
+    );
+  }
+
   const { error: negErro } = await admin
     .from("negocios")
     .update({
