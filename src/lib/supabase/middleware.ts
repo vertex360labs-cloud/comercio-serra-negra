@@ -43,7 +43,11 @@ export async function atualizarSessao(request: NextRequest) {
     data: { user },
   } = await supabase.auth.getUser();
 
+  // Redirect em Server Action quebra o POST com "An unexpected response was received from the server."
+  const ehServerAction = request.headers.has("next-action");
+
   if (
+    !ehServerAction &&
     (request.nextUrl.pathname.startsWith("/painel") ||
       request.nextUrl.pathname.startsWith("/admin")) &&
     !user
@@ -51,7 +55,6 @@ export async function atualizarSessao(request: NextRequest) {
     const url = request.nextUrl.clone();
     url.pathname = "/entrar";
     url.searchParams.set("next", request.nextUrl.pathname);
-    // Não reescreve cookies no redirect — evita gravar sessão vazia.
     return NextResponse.redirect(url);
   }
 
