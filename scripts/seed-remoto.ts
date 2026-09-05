@@ -1,8 +1,10 @@
+import { loadEnvConfig } from "@next/env";
 import { createClient } from "@supabase/supabase-js";
 import { CATEGORIAS } from "../src/data/categorias";
 import { NEGOCIOS_MOCK } from "../src/data/negocios-mock";
 
 async function main() {
+  loadEnvConfig(process.cwd());
   const url = process.env.SUPABASE_URL ?? process.env.NEXT_PUBLIC_SUPABASE_URL;
   const key = process.env.SUPABASE_SERVICE_ROLE_KEY;
   if (!url || !key) throw new Error("Faltam SUPABASE_URL e SUPABASE_SERVICE_ROLE_KEY");
