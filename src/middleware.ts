@@ -6,12 +6,6 @@ export async function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: [
-    /*
-     * Renova a sessão em quase todas as rotas.
-     * Matcher estreito (/painel|/admin|/entrar) fazia o refresh
-     * falhar depois do salvar e parecer "logout".
-     */
-    "/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)",
-  ],
+  // Estreito de propósito: matcher amplo + refresh falho apagava cookies a cada clique.
+  matcher: ["/painel/:path*", "/admin/:path*", "/entrar"],
 };

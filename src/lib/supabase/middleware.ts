@@ -27,7 +27,9 @@ export async function atualizarSessao(request: NextRequest) {
           return request.cookies.getAll();
         },
         setAll(cookiesToSet) {
-          cookiesToSet.forEach(({ name, value }) => request.cookies.set(name, value));
+          cookiesToSet.forEach(({ name, value }) =>
+            request.cookies.set(name, value),
+          );
           response = NextResponse.next({ request });
           cookiesToSet.forEach(({ name, value, options }) =>
             response.cookies.set(name, value, options),
@@ -49,12 +51,8 @@ export async function atualizarSessao(request: NextRequest) {
     const url = request.nextUrl.clone();
     url.pathname = "/entrar";
     url.searchParams.set("next", request.nextUrl.pathname);
-    const redirect = NextResponse.redirect(url);
-    // Preserva cookies que o refresh da sessão possa ter setado.
-    response.cookies.getAll().forEach((cookie) => {
-      redirect.cookies.set(cookie.name, cookie.value);
-    });
-    return redirect;
+    // Não reescreve cookies no redirect — evita gravar sessão vazia.
+    return NextResponse.redirect(url);
   }
 
   return response;
