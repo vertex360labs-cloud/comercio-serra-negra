@@ -219,21 +219,18 @@ otp_length = 6
 # Number of seconds before the email OTP expires (defaults to 1 hour).
 otp_expiry = 3600
 
-# Use a production-ready SMTP server
-# [auth.email.smtp]
-# enabled = true
-# host = "smtp.sendgrid.net"
-# port = 587
-# user = "apikey"
-# pass = "env(SENDGRID_API_KEY)"
-# admin_email = "admin@email.com"
-# sender_name = "Admin"
+[auth.email.smtp]
+enabled = true
+host = "smtp.resend.com"
+port = 465
+user = "resend"
+pass = "env(RESEND_API_KEY)"
+admin_email = "vertex360.labs@gmail.com"
+sender_name = "Comércio Serra Negra"
 
-# Template pronto em ./supabase/templates/magic_link.html
-# Push de template no Auth free tier exige SMTP custom.
-# [auth.email.template.magic_link]
-# subject = "Link Comércio Serra Negra — entre no painel"
-# content_path = "./supabase/templates/magic_link.html"
+[auth.email.template.magic_link]
+subject = "Link Comércio Serra Negra — entre no painel"
+content_path = "./supabase/templates/magic_link.html"
 
 # [auth.email.template.invite]
 # subject = "You have been invited"
