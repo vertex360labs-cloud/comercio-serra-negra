@@ -1,18 +1,17 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter } from "next/navigation";
 import { CepFields } from "@/components/forms/CepFields";
 import { HorariosFields } from "@/components/forms/HorariosFields";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { salvarFichaNegocio } from "@/app/painel/negocio/actions";
 import { criarClienteBrowser } from "@/lib/supabase/client";
 import { formatarCep } from "@/lib/cep";
 import { normalizarWhatsApp } from "@/lib/whatsapp";
 import type { HorarioFuncionamento, Negocio } from "@/types/negocio";
 
 export function FormFicha({ negocio }: { negocio: Negocio }) {
-  const router = useRouter();
   const [horarios, setHorarios] = useState<HorarioFuncionamento[]>(negocio.horarios);
   const [capa, setCapa] = useState(negocio.capa_url);
   const [erro, setErro] = useState<string | null>(null);
@@ -79,13 +78,9 @@ export function FormFicha({ negocio }: { negocio: Negocio }) {
         };
 
         try {
-          const supabase = criarClienteBrowser();
-          const { error } = await supabase.from("negocios").update(payload).eq("id", negocio.id);
-          if (error) setErro(error.message);
-          else {
-            setOk(true);
-            router.push("/painel");
-          }
+          const resultado = await salvarFichaNegocio(negocio.id, payload);
+          if (!resultado.ok) setErro(resultado.erro);
+          else setOk(true);
         } catch (e) {
           setErro(e instanceof Error ? e.message : "Não salvou.");
         } finally {
